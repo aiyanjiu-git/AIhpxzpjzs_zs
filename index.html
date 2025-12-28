@@ -11,38 +11,33 @@
   
   <script>
     var webSdkScript = document.createElement('script');
-    webSdkScript.src = 'https://lf-cdn.coze.cn/obj/unpkg/flow-platform/builder-web-sdk/0.1.1-beta.1/dist/umd/index.js';
+    webSdkScript.src = 'https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.0.0-beta.4/libs/cn/index.js';
     document.head.appendChild(webSdkScript);
-    
+
     webSdkScript.onload = function () {
       try {
-        window.cozeClient = new CozeWebSDK.AppWebSDK({
-          token: 'pat_x01MV4tul5QscjR2Z0ezU1S9MHAHBphGubcIuNLmytDYtT6IrthsCOk1dfh43nLA',
-          appId: '7576219529463365675',
-          container: '#app',
-          userInfo: {
-            id: 'user_001',
-            url: 'https://lf-coze-web-cdn.coze.cn/obj/eden-cn/lm-lgvj/ljhwZthlaukjlkulzlp/coze/coze-logo.png',
-            nickname: 'User'
+        window.cozeClient = new CozeWebSDK.WebChatClient({
+          config: {
+            bot_id: '7576219529463365675',
           },
-          ui: {
-            className: 'custom-coze-sdk'
-          }
+          componentProps: {
+            title: 'AI环评噪声现状评价助手',
+          },
         });
-        
+
         console.log('✅ 扣子 Web SDK 初始化成功');
       } catch (error) {
         console.error('❌ SDK 初始化失败:', error);
-        document.getElementById('app').innerHTML = 
+        document.getElementById('app').innerHTML =
           '<div style="padding: 20px; text-align: center; color: #f56c6c;">' +
-          '初始化失败：' + error.message + 
+          '初始化失败：' + error.message +
           '</div>';
       }
     };
-    
+
     webSdkScript.onerror = function () {
       console.error('❌ SDK 脚本加载失败');
-      document.getElementById('app').innerHTML = 
+      document.getElementById('app').innerHTML =
         '<div style="padding: 20px; text-align: center; color: #f56c6c;">' +
         'SDK 加载失败，请检查网络连接' +
         '</div>';
